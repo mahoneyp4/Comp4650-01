@@ -1,0 +1,37 @@
+//To Do:
+- Insert error message from IP check
+- Insert js Dashboard itself
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <nav class="toc">
+      <ul>
+        <li><a href="/">HOME</a> | </li>
+        <li><a href="/snmp">SNMP</a> | </li>
+        <li><a href="/nmap">NMAP</a> | </li>
+      </ul>
+    </nav>
+    <section>
+      <h1>Welcome to the Home page!</h1>
+      <p id="landing">
+        Para
+      </p>
+      <form action="/" method="POST">
+        <label for="fname">Dashboard IP:</label>
+        <input type="text" id="daship" name="daship"><br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+    <div class="buttons">
+      <div class="row">
+        <button type="button" name="snmpButton" onclick="window.location.href = '/snmp';">SNMP Update</button>
+      </div>
+    </div>
+  </body>
+</html>
