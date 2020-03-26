@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Boop</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form action="/snmp/" method="POST">
+
+      <p>Testing for  <%= data.ip %>  </p>
+      <label for="ip">IP Address</label>
+      <input type="text" name="ip">
+
+      <label for="subnet">Subnet</label>
+      <input type="text" name="subnet">
+
+      <input type="submit" value="Submit">
+    </form>
+    
+  </body>
+</html>
