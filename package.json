@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -14,7 +15,8 @@
     "http-errors": "~1.6.3",
     "is-ip": "^3.1.0",
     "morgan": "~1.9.1",
-    "net-snmp": "^2.5.2",
-    "node-nmap": "^4.0.0"
+    "net-snmp": "^2.5.4",
+    "node-nmap": "^4.0.0",
+    "nodemon": "^2.0.2"
   }
 }
