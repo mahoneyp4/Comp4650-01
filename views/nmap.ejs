@@ -7,5 +7,22 @@
 <body>
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
+
+<form action="/nmap/" method="POST">
+    <label for="fname">Dashboard IP:</label>
+    <input type="text" id="ipAddr" name="ipAddr"><br><br>
+    <input type="text" id="subnet" name="subnet"><br><br>
+    <input type="radio" id="quickScan" name="scan" value="QuickScan">
+    <label for="">QuickScan</label><br>
+    <input type="radio" id="oSPortScan" name="scan" value="OSPortScan">
+    <label for="">OSPortScan</label><br>
+    <input type="radio" id="intenseSca" name="scan" value="IntenseScan">
+    <label for="">IntenseScan</label><br>
+    <input type="radio" id="customScan" name="scan" value="CustomScan">
+    <label for="">CustomScan</label><br>
+    <input type="text" id="customParam" name="customParam"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
 </body>
 </html>
