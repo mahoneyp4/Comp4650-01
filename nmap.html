@@ -1,0 +1,47 @@
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+	<div class="header">
+  <div class="header-left">
+    <a input type="button" onclick="window.location.href = 'index.html';" href="#home">Home</a>
+    <a input type="button" onclick="window.location.href = 'nmap.html';" href="#nmap">NMAP</a>
+    <a input type="button" onclick="window.location.href = 'snmp.html';" href="#snmp">SNMP</a>
+  </div>
+  </div>
+ </head>
+ 
+ <body>
+ <h3>Target Subnet:</h3>
+ <input type="text" id="subnet"/>
+ 
+ <div>
+ <h3>Other options</h3>
+  <input type="radio" id="quickscan" name="options" value="quickscan">
+  <label for="quickscan">Quick Scan</label><br>
+  <input type="radio" id="osportscan" name="options" value="osportscan">
+  <label for="osportscan">OS and port scan</label><br>
+  <input type="radio" id="single" name="options" value="single">
+  <label for="single">Single target</label><br>
+  <input type="radio" id="full" name="options" value="full">
+  <label for="full">Full Scan</label>
+  <br>  
+</form>
+ </div>
+ <div>
+ <h3>Custom NMAP command:</h3>
+ <input type="text" id="nmapcommand"/>
+ </div>
+ 
+ 
+ <div>
+ <br>
+ <input type="submit" onclick="myFunction()" value="Submit"/> 
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("subnet").submit;
+}
+</script>
+
+</html>
