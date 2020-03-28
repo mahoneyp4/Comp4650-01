@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var snmp = require('net-snmp');
 var session = snmp.createSession("192.168.0.219");
-var oids = ["."];
+var oids = [".1.3.6.1.4.1.2021.4.5.0"];
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -15,20 +15,9 @@ router.post('/', function(req, res){
     //res.send(req.body);\
     ip = req.body.ip;
     subnet= req.body.subnet;
-    session.get(oids,function(error, varbinds){
-        if (error){
-            console.log(error);
-        }else{
-            for (var i = 0; i < varbinds.length; i++)
-            if (snmp.isVarbindError (varbinds[i]))
-                console.error (snmp.varbindError (varbinds[i]))
-            else
-                console.log (varbinds[i].oid + " = " + varbinds[i].value);
-        }
-  
-        session.close ();
-
-    });
+ 
+    console.log("Fetching OID or something")
+    console.log(session.get(oids))
 
 
     data = {
