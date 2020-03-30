@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var snmp = require('net-snmp');
-var session = snmp.createSession("192.168.0.219");
+var snmp = require("net-snmp");
+var session = snmp.createSession("192.168.0.219", "public");
 var oids = ["1.3.6.1.2.1.1.5.0", "1.3.6.1.2.1.1.6.0"];
 
 session.on ("error", function (error) {
@@ -12,6 +12,8 @@ session.on ("error", function (error) {
 session.on ("close", function () {
     console.log ("socket closed");
 });
+
+
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -26,8 +28,6 @@ router.post('/', function(req, res){
     subnet= req.body.subnet;
  
     console.log("Fetching OID or something")
-    console.log(session.get(oids))
-
     session.get (oids, function (error, varbinds) {
         if (error) {
             console.error (error.toString ());
@@ -41,6 +41,8 @@ router.post('/', function(req, res){
             }
         }
     });
+
+
     
 
 
