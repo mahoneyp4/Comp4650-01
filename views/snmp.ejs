@@ -7,13 +7,17 @@
   <body>
     <form action="/snmp/" method="POST">
 
-   
+      <p>Testing for  <%= data.ip %>  </p>
       <label for="ip">IP Address</label>
       <input type="text" name="ip">
 
-      <label for="subnet">Subnet</label>
-      <input type="text" name="subnet">
-
+      <label for="oid">OID</label>
+      <input type="text" name="oid">
+      <br/>
+      <input type="checkbox" name="default" id="default">
+      
+      <label for="default">Default Settings</label>
+      <br/>
       <input type="submit" value="Submit">
     </form>
     
