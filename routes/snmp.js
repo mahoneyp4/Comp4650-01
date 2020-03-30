@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var snmp = require('net-snmp');
 var session = snmp.createSession("192.168.0.219");
-var oids = [".3.6.1.2.1.1.6.0"];
+var oids = ["1.3.6.1.2.1.1.5.0", "1.3.6.1.2.1.1.6.0"];
 
 session.on ("error", function (error) {
     console.log (error.toString ());
