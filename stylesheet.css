@@ -71,3 +71,11 @@
   margin: 20px;
   text-align: center;
 }
+
+.output {
+  background-color: lightblue;
+  width: auto;
+  border: 15px solid grey;
+  padding: 70px;
+  margin: 20px;
+  text-align: center;
