@@ -1,28 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/stylesheet.css">
+    <div class="header">
+        <div class="header-left">
+            <a input type="button" onclick="window.location.href = 'index.html';" href="#home">Home</a>
+            <a input type="button" onclick="window.location.href = 'nmap.html';" href="#nmap">NMAP</a>
+            <a input type="button" onclick="window.location.href = 'snmp.html';" href="#snmp">SNMP</a>
+        </div>
+    </div>
 </head>
+
+<script type="text/javascript">
+    function EnableDisableTextBox() {
+        var custom = document.getElementById("custom");
+        var customScan = document.getElementById("customScan");
+        customScan.disabled = custom.checked ? false : true;
+        if (!customScan.disabled) {
+            customScan.focus();
+        }
+    }
+</script>
+
 <body>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-
 <form action="/nmap/" method="POST">
-    <label for="fname">Dashboard IP:</label>
-    <input type="text" id="ipAddr" name="ipAddr"><br><br>
-    <input type="text" id="subnet" name="subnet"><br><br>
-    <input type="radio" id="quickScan" name="scan" value="QuickScan">
-    <label for="">QuickScan</label><br>
-    <input type="radio" id="oSPortScan" name="scan" value="OSPortScan">
-    <label for="">OSPortScan</label><br>
-    <input type="radio" id="intenseSca" name="scan" value="IntenseScan">
-    <label for="">IntenseScan</label><br>
-    <input type="radio" id="customScan" name="scan" value="CustomScan">
-    <label for="">CustomScan</label><br>
-    <input type="text" id="customParam" name="customParam"><br><br>
-    <input type="submit" value="Submit">
+    <h3>Target IP:</h3>
+    <input type="text" id="ipAddr" name="ipAddr">
+    <div>
+        <h3>Options</h3>
+        <input type="radio" id="quickScan" name="scan" value="QuickScan" onclick="EnableDisableTextBox()" />
+        <label for="quickscan">Quick Scan</label><br>
+        <input type="radio" id="osportscan" name="scan" value="OSPortScan" onclick="EnableDisableTextBox()" />
+        <label for="osportscan">OS and Port Scan</label><br>
+        <input type="radio" id="intense" name="scan" value="IntenseScan" onclick="EnableDisableTextBox()" />
+        <label for="single">Intense Scan</label><br>
+            <input type="radio" id="custom" name="scan" value="CustomScan" onclick="EnableDisableTextBox()" />
+            <label for="custom">Custom Scan</label> <input type="text" id="customScan" disabled="disabled" />
+            <br>
+        <div>
+            <br>
+            <input type="submit" value="Submit"/>
+            <input type="submit" value="Export"/>
+        </div>
+    </div>
 </form>
+<br>
+<output name="output" id="output"/>
+<div class="output" id="outputTest">Output
+    <p id="jsonTest"></p>
+    <pre id="json"></pre>
+</div>
 
+</form>
 </body>
+
+<script type="text/javascript">
+    var test = <%-JSON.stringify(data)%>;
+    //var jsonData = <%-JSON.stringify(data)%>;
+    //document.getElementById("json").textContent = jsonData;
+    var locationP = document.getElementById("jsonTest");
+    locationP.innerHTML = JSON.stringify(test, undefined, "</br>");
+
+</script>
+
 </html>
