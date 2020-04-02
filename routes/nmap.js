@@ -3,38 +3,14 @@ var fs = require('fs');
 var isIp = require('is-ip');
 var express = require('express');
 var router = express.Router();
-
 nmap.nmapLocation = "nmap";
-//Functions
-/**
- *
- * Use check boxes to setup the scans || Will prevent stupid bugs & issues
- *
- * TypeScan:
- *  -> Input: IP range, Scan Type
- *
- * Custom Scan Check for Bad Strings
- *  -> Ensure no 'super' scans occur
- *  -> Regex to stop bad ranges
- *  -> Stop Scans outside of the network ???
- *
- *  CustomScan:
- *  -> Input: Custom Scan
- *
- *  Formating:
- *  -> Make stuff readable
- *
- */
 
 
-function perfromScan(ipAddr, subnet, scanType, customString){
+function perfromScan(ipAddr, scanType, customString){
+   console.log(ipAddr+" "+scanType+" "+customString)
     var curScan = null;
-    if(subnet){
-        var range = ipAddr+"/"+subnet;
-    }else{
-        var range = ipAddr;
-    }
-    var fullNmap = ["-p 1-65535", "-sS", "-sU", "-T4", "-A", "-v"];
+    var fullNmap = ["-T4", "-A", "-v"];
+   // To slow var fullNmap = ["-p 1-65535", "-sS", "-sU", "-T4", "-A", "-v"];
     function actionFunction(data){
             //console.log(data);
             //document.write("Percentage complete" + curScan.percentComplete());
@@ -42,22 +18,23 @@ function perfromScan(ipAddr, subnet, scanType, customString){
         }
     switch(scanType) {
         case "QuickScan":
-            curScan = new nmap.QueuedQuickScan(range, actionFunction);
+            curScan = new nmap.QueuedQuickScan(ipAddr, actionFunction);
             break;
         case "OSPortScan":
-            curScan = new nmap.QueuedOsAndPortScan(range, actionFunction);
+            curScan = new nmap.QueuedOsAndPortScan(ipAddr, actionFunction);
             break;
         case "IntenseScan":
-            curScan = new nmap.QueuedNmapScan(range, fullNmap, actionFunction);
+            curScan = new nmap.QueuedNmapScan(ipAddr, fullNmap, actionFunction);
             break;
         case "CustomScan":
             var params = customSyntax(customString);
-            curScan = new nmap.QueuedNmapScan(range, params, actionFunction);
+            curScan = new nmap.QueuedNmapScan(ipAddr, params, actionFunction);
             break;
-        }curScan.on('complete', function(data){
+        }
+        curScan.on('complete', function(data){
             console.log(data);
             console.log("total scan time" + curScan.scanTime);
-            saveJson(curScan);
+            saveJson(curScan.results());
         });
 
         curScan.on('error', function(error){
@@ -97,19 +74,24 @@ function saveJson(ent){
 /* POST from users requesting NMAP scans */
 router.post('/', function(req, res, next) {
     var ipAddr = req.body.ipAddr;
-    var subnet = req.body.subnet;
     var scan = req.body.scan;
     var customParam = req.body.customParam;
-    var curScan = perfromScan(ipAddr, subnet, scan, customParam)
+    var curScan = perfromScan(ipAddr, scan, customParam)
     console.log(curScan);
     console.log("--------------------------------------");
     console.log(curScan.results());
-    res.render('nmap', { title: 'Home Page' });
+    curScan.on('complete', function(data){
+        console.log(data);
+        console.log("total scan time" + curScan.scanTime);
+        saveJson(curScan.results());
+        res.render('nmap', { data: curScan.results() });
+    });
 });
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('nmap', { title: 'Home Page' });
+    var empty = {};
+    res.render('nmap', { data: empty });
 });
 
 module.exports = router;
