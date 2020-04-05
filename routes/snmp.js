@@ -13,7 +13,7 @@ var snmp = require("net-snmp");
 /* GET users listing. */
 router.get('/', function(req, res) {
 
-    res.render('snmp');
+    res.render('newSnmp');
 });
 
 
@@ -81,7 +81,7 @@ router.post('/', function(req, res){
         ip: req.body.ip,
         subnet: req.body.subnet
     }
-    res.render('snmp-submit', data);
+    res.render('newSnmp-submit', data);
     
 })
 
