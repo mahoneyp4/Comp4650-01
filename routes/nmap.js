@@ -7,6 +7,7 @@ nmap.nmapLocation = "nmap";
 
 
 function perfromScan(ipAddr, scanType, customString){
+   console.log(ipAddr+" "+scanType+" "+customString)
     var curScan = null;
     var fullNmap = ["-T4", "-A", "-v"];
    // To slow var fullNmap = ["-p 1-65535", "-sS", "-sU", "-T4", "-A", "-v"];
@@ -31,8 +32,9 @@ function perfromScan(ipAddr, scanType, customString){
             break;
         }
         curScan.on('complete', function(data){
-            //console.log(data);
+            console.log(data);
             console.log("total scan time" + curScan.scanTime);
+            saveJson(curScan.results());
         });
 
         curScan.on('error', function(error){
@@ -44,16 +46,23 @@ function perfromScan(ipAddr, scanType, customString){
 }
 
 function customSyntax(customString){
-    var output = customString.split(" ");
-    console.log(output);
+    //break down string
+    //regex catch for any bad syntax queries
+    //place command parameters in var output
+
+    var output = null;
+
     return output;
+}
+
+function formatOutput(input){
+//better look
 }
 
 function exportCSV(input){
 //finding better way
 }
 
-//Troubleshooting for JSON output
 function saveJson(ent){
     let data = JSON.stringify(ent);
     fs.writeFile('./test.json', data, (err) => {
@@ -66,16 +75,15 @@ function saveJson(ent){
 router.post('/', function(req, res, next) {
     var ipAddr = req.body.ipAddr;
     var scan = req.body.scan;
-    var customParam = req.body.customScan;
-    console.log(scan +" "+customParam);
+    var customParam = req.body.customParam;
     var curScan = perfromScan(ipAddr, scan, customParam)
-   // console.log(curScan);
+    console.log(curScan);
     console.log("--------------------------------------");
     console.log(curScan.results());
     curScan.on('complete', function(data){
         console.log(data);
         console.log("total scan time" + curScan.scanTime);
-        // Debugging: saveJson(curScan.results());
+        saveJson(curScan.results());
         res.render('nmap', { data: curScan.results() });
     });
 });
