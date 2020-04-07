@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="/stylesheets/stylesheet.css">
     <div class="header">
         <div class="header-left">
-            <a input type="button" onclick="window.location.href = 'index.html';" href="#home">Home</a>
-            <a input type="button" onclick="window.location.href = 'nmap.html';" href="#nmap">NMAP</a>
-            <a input type="button" onclick="window.location.href = 'snmp.html';" href="#snmp">SNMP</a>
+            <a input type="button" class = "btn active" onclick="window.location.href = '/';" href="#home">Home</a>
+            <a input type="button" class = "btn" onclick="window.location.href = '/nmap';" href="#nmap">NMAP</a>
+            <a input type="button" class = "btn" onclick="window.location.href = '/snmp';" href="#snmp">SNMP</a>
         </div>
     </div>
 </head>
@@ -35,7 +35,7 @@
         <input type="radio" id="intense" name="scan" value="IntenseScan" onclick="EnableDisableTextBox()" />
         <label for="single">Intense Scan</label><br>
             <input type="radio" id="custom" name="scan" value="CustomScan" onclick="EnableDisableTextBox()" />
-            <label for="custom">Custom Scan</label> <input type="text" id="customScan" disabled="disabled" />
+            <label for="custom">Custom Scan</label> <input type="text" id="customScan"  name="customScan" disabled="disabled" />
             <br>
         <div>
             <br>
@@ -56,11 +56,8 @@
 
 <script type="text/javascript">
     var test = <%-JSON.stringify(data)%>;
-    //var jsonData = <%-JSON.stringify(data)%>;
-    //document.getElementById("json").textContent = jsonData;
     var locationP = document.getElementById("jsonTest");
-    locationP.innerHTML = JSON.stringify(test, undefined, "</br>");
-
+    locationP.innerHTML = JSON.stringify(test, undefined, "");
 </script>
 
 </html>
