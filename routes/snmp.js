@@ -13,11 +13,11 @@ var cpuOids='1.3.6.1.4.1.2021.10.1.3.3,1.3.6.1.4.1.2021.11.50.0'
 router.post('/', function(req, res){
     if(req.body.default){
         console.log('Default true')
-        // ip ='192.168.0.10';
-        //oids = ["1.3.6.1.2.1.1.5.0", "1.3.6.1.2.1.1.6.0"];
+        //ip ='192.168.0.10';
+        oids = ["1.3.6.1.2.1.1.5.0","1.3.6.1.2.1.2.2.1.10.1","1.3.6.1.2.1.2.2.1.10.2","1.3.6.1.4.1.2021.10.1.3.3","1.3.6.1.4.1.2021.11.50.0"];
         
-        //ip=req.body.ip;
-        // oids=req.body.ip;
+        ip=req.body.ip;
+        //oids=req.body.ip;
         session = snmp.createSession(ip, "public");
         var snmpResponse ='';
         session.get(oids, function (error,varbinds){
@@ -51,7 +51,7 @@ router.post('/', function(req, res){
     }else{
         console.log('Default false')
         ip = req.body.ip;
-        if(ip=='')ip='192.168.0.10'
+        //if(ip=='')ip='192.168.0.10'
         console.log(req.body);
         console.log('ip] '+ ip)
         oids=req.body.oid;
@@ -75,7 +75,7 @@ router.post('/', function(req, res){
         }
        
         
-           
+    
         //////////////////////////////////////////
         console.log(oids);
         oids=oids.split(',');

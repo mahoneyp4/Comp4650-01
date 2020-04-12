@@ -80,11 +80,11 @@ window.onload = function(){
 
    var checkSubmit = document.getElementById('mainForm');
 
-//    checkSubmit.addEventListener('submit', function(e){
+   checkSubmit.addEventListener('submit', function(e){
     
-//     if(!validateForm())
-//         e.preventDefault();
-//    });
+    if(!validateForm())
+        e.preventDefault();
+   });
 
 
 };
